@@ -1,0 +1,24 @@
+
+
+
+data = Similarity_Module()
+#print(data.music_similarity({'': [0.995, 0.708, 0.195, 0.151, -12.428, 0.0506, 118.469, 0.779], '6KuQTIu1KoTTkLXKrwlLPV': [0.994, 0.379, 0.0135, 0.0763, -28.454, 0.0462, 83.97200000000002, 0.0767]},'6KbQ3uYMLKb5jDxLF7wYDD','6KuQTIu1KoTTkLXKrwlLPV','euclidean'))
+#print('am here')
+
+def pearson_similarity(feature1, feature2):
+    'computes the pearson correlation between the music or artists'
+    xy = []
+    xx = []
+    yy = []
+    try:
+        for i in range(len(feature1)):
+            xy.append(feature1[i] * feature2[i])
+            xx.append(feature1[i] * feature1[i])
+            yy.append(feature2[i] * feature2[i])
+        # pearson formula 
+        numerator = (len(feature1) * sum(xy)) - sum(feature1)*sum(feature2)
+        denominator = (((len(feature1) * sum(xx)) - (sum(feature1)**2)) * ((len(feature1) * sum(yy)) - (sum(feature2)**2))) ** 0.5
+        cofficient  = numerator / denominator 
+        return cofficient
+    except KeyError:
+        print('Artists/Music id not found..Check inputs')
